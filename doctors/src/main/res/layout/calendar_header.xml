@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/headerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/dark_gray"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textSize="20sp"
+            tools:text="October 2019" />
+
+        <include
+            android:id="@+id/legendLayout"
+            layout="@layout/calendar_day_legend" />
+    </LinearLayout>
+
+</FrameLayout>
+

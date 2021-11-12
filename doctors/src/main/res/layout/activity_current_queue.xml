@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/currQ"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@color/white"
+    android:layerType="software"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cqueueBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat"
+        android:text="My Current Queue"
+        android:textColor="@color/black"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:transitionName="transTitle" />
+
+    <!-- current patient -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCurrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/light_salmon"
+        android:clickable="true"
+        android:focusable="false"
+        android:transitionName="cServing"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/currentlyServing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Currently Serving"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/slot1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:text="---"
+                android:textColor="@color/very_light_gray"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/nameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/lato"
+                        android:gravity="left"
+                        android:text="Name"
+                        android:textColor="@color/very_light_gray"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bdayText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/lato"
+                        android:gravity="left"
+                        android:text="Age: "
+                        android:textColor="@color/very_light_gray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/rsnText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato"
+                        android:gravity="left"
+                        android:text="Reason: "
+                        android:textColor="@color/very_light_gray"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- start session button -->
+        <Button
+            android:id="@+id/startBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:minHeight="48dp"
+            android:text="START SESSION"
+            android:textAllCaps="false"
+            android:textColor="#F36767" />
+
+        <!-- end session button -->
+        <Button
+            android:id="@+id/endBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:minHeight="48dp"
+            android:text="END SESSION"
+            android:textAllCaps="false"
+            android:textColor="#F36767" />
+
+    </LinearLayout>
+
+    <!-- next patients -->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        app:cardBackgroundColor="@color/very_light_salmon"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true">
+
+        <TextView
+            android:id="@+id/noqueueText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="No patients in queue."
+            android:textColor="@color/dark_gray"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <!-- refresh button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/refreshBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/dark_salmon"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:elevation="4dp"
+            app:rippleColor="@color/white"
+            app:srcCompat="@android:drawable/ic_popup_sync" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:id="@+id/queueView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="0dp">
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

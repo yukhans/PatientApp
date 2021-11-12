@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HistoryWeek">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="0dp">
+
+            <TextView
+                android:id="@+id/noHistoryText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/montserrat"
+                android:text="No patients served for the past 7 days."
+                android:textColor="@color/dark_gray"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date7Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 7, Date 7"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date7Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 7, Date 7"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date6Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 6, Date 6"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date6Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 6, Date 6"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date5Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 5, Date 5"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date5Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 5, Date 5"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date4Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 4, Date 4"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date4Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 4, Date 4"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date3Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 3, Date 3"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date3Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 3, Date 3"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date2Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 2, Date 2"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date2Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 2, Date 2"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/date1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_gray"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/date1Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Day 1, Date 1"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/date1Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Day 1, Date 1"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

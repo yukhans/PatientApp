@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        tools:context=".ProfileUpdate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/updateDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Update My Details"
+                    android:textColor="@color/black"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    android:transitionName="transTitle" />
+
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_light_gray"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="30dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/update_fname"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:autoSizeMaxTextSize="14sp"
+                        android:autoSizeMinTextSize="8sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="10"
+                        android:fontFamily="@font/lato"
+                        android:hint="First Name"
+                        android:inputType="text"
+                        android:minHeight="48dp"
+                        android:paddingLeft="15dp" />
+
+                    <EditText
+                        android:id="@+id/update_lname"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:autoSizeMaxTextSize="14sp"
+                        android:autoSizeMinTextSize="8sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="10"
+                        android:fontFamily="@font/lato"
+                        android:hint="Last Name"
+                        android:inputType="text"
+                        android:minHeight="48dp"
+                        android:paddingLeft="15dp" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="Sex"
+                        android:textSize="18sp" />
+
+                    <RadioGroup
+                        android:id="@+id/radioSex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioFemale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/lato"
+                            android:text="Female" />
+
+                        <RadioButton
+                            android:id="@+id/radioMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato"
+                            android:text="Male" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="Specialization"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/warningSpec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="Selection must be no greater than 3."
+                        android:textColor="@color/red"
+                        android:textSize="13sp"
+                        android:visibility="gone"/>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginBottom="10dp">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipSpec"
+                            style="@style/Widget.MaterialComponents.ChipGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:lineSpacing="5dp"
+                            app:singleSelection="false" />
+                    </HorizontalScrollView>
+
+                    <LinearLayout
+                        android:id="@+id/buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/confirmBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="40dp"
+                            android:layout_marginTop="30dp"
+                            android:autoSizeMaxTextSize="16sp"
+                            android:autoSizeMinTextSize="10sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:autoSizeTextType="uniform"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="sans-serif-medium"
+                            android:minHeight="48dp"
+                            android:text="CONFIRM"
+                            android:textAllCaps="false"
+                            android:textColor="#F36767" />
+
+                        <Button
+                            android:id="@+id/back"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:backgroundTint="#FFFFFF"
+                            android:clickable="true"
+                            android:fontFamily="@font/lato"
+                            android:gravity="center"
+                            android:text="BACK TO PROFILE"
+                            android:textColor="#F36767"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+</ScrollView>

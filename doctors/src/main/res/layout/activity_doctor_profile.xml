@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context="com.example.doctors.ProfileUpdate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:paddingTop="15dp">
+
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:id="@+id/profile_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat"
+                android:textAlignment="center"
+                android:textColor="@color/gray"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="#F36767"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="ID"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="----------"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="Sex"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="----------"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="Specialization"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_spec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="----------"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="Average Consultation
+                                    Time"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_consTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="----------"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="Schedule"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/schedView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/updateDetails"
+                android:transitionName="transTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="true"
+                android:text="UPDATE PROFILE DETAILS"
+                android:visibility="visible"
+                android:textColor="#F36767" />
+
+            <Button
+                android:id="@+id/updateSchedule"
+                android:transitionName="transTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="true"
+                android:text="SET SCHEDULE"
+                android:visibility="visible"
+                android:textColor="#F36767" />
+
+            <Button
+                android:id="@+id/updateKey"
+                android:transitionName="transTitle"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="#FFFFFF"
+                android:clickable="true"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:text="UPDATE KEY"
+                android:textColor="#F36767" />
+
+        </LinearLayout>
+
+</ScrollView>

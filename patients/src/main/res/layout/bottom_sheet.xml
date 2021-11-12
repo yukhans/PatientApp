@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/design_bottom_sheet"
+    android:background="@color/zxing_transparent"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="80dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#f2f2f2"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="5dp"
+                android:background="#F36767"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="My Booking"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/bookedreason"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Reason:"
+                android:fontFamily="@font/lato"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/bookedspec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/lato"
+                android:text="Specialization:"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/bookeddoctor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Doctor:"
+                android:fontFamily="@font/lato"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginTop="2dp"/>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

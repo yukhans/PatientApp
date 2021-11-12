@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foregroundTint="#FFFFFF"
+    android:orientation="vertical"
+    tools:context="com.example.patientapp.PatientLogin">
+
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="sans-serif"
+        android:text="PATIENT"
+        android:textColor="#F36767"
+        android:textSize="25sp"
+        android:typeface="monospace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/emailtext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:background="@drawable/rounded_corner"
+        android:fontFamily="@font/lato"
+        android:hint="Email address"
+        android:paddingLeft="15dp"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/pass_id_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="0.946" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:textColorHint="#a8a8a8"
+        app:hintTextColor="@color/gray"
+        app:hintEnabled="false"
+        app:errorEnabled="false"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:padding="0dp"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passtext"
+            android:ems="10"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Password"
+            android:padding="0dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"
+            android:background="@drawable/rounded_corner"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/login_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#F36767"
+        android:fontFamily="sans-serif-medium"
+        android:text="Sign In"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_patient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/lato"
+        android:text="or"
+        android:textColor="#9E9E9E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/googleSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        style="@style/Theme.Design.Light.NoActionBar"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/rounded_corner"
+        android:drawableLeft="@drawable/google_smaller"
+        android:drawablePadding="0dp"
+        android:text="Sign up with Google"
+        android:textAllCaps="false"
+        android:layout_gravity="left"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/lato"
+        android:text="No account yet?"
+        android:textColor="#9C9C9C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_patient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/registerPatient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        style="?android:attr/borderlessButtonStyle"
+        android:clickable="true"
+        android:text="Click here to register"
+        android:textColor="#F36767"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</LinearLayout>
+

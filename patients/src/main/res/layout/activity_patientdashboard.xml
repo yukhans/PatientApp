@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/greetingname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Hi ,"
+        android:textColor="@color/black"
+        android:textSize="27sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Good day, how can we help you?"
+        android:fontFamily="@font/lato"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="0dp"
+        android:textSize="16sp"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="30dp"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:drawableTop="@drawable/calendar_smaller"
+            android:text="Book Appointment"
+            android:textSize="14sp"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:drawableTop="@drawable/queue_smaller"
+            android:text="queue status"
+            android:textSize="14sp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:drawableTop="@drawable/scan_smaller"
+            android:text="Scan QR code"
+            android:textSize="14sp"
+            android:paddingTop="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:drawableTop="@drawable/checklist_smaller"
+            android:text="Activity Checklist"
+            android:textSize="14sp"
+            android:paddingTop="15dp"
+            android:drawablePadding="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>
+

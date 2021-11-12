@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.patientapp.PatientRegistration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foregroundTint="#FFFFFF"
+    android:orientation="vertical">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:foregroundTint="#FFFFFF"
+     android:orientation="vertical"
+     android:padding="0dp">
+
+    <TextView
+        android:id="@+id/registernote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="sans-serif"
+        android:text="PATIENT REGISTRATION"
+        android:textColor="#F36767"
+        android:textSize="22sp"
+        android:typeface="monospace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+     <View
+         android:layout_width="match_parent"
+         android:layout_marginStart="50dp"
+         android:layout_marginEnd="50dp"
+         android:layout_height="1dp"
+         android:background="#F36767"
+         android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/fname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:fontFamily="@font/lato"
+        android:hint="First Name"
+        android:paddingLeft="15dp"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/pass_id_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="0.946" />
+
+    <EditText
+        android:id="@+id/lname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:fontFamily="@font/lato"
+        android:hint="Last Name"
+        android:paddingLeft="15dp"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textSize="14sp" />
+
+     <RadioGroup
+         android:id="@+id/radioGroup"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="50dp"
+         android:layout_marginEnd="50dp"
+         android:backgroundTint="#F36767"
+         android:orientation="horizontal">
+
+         <RadioButton
+             android:id="@+id/male_btn"
+             android:layout_width="150dp"
+             android:fontFamily="@font/lato"
+             android:layout_height="wrap_content"
+             android:layout_marginRight="15sp"
+             android:layout_marginBottom="15dp"
+             android:buttonTint="#F36767"
+             android:text="Male"
+             android:textAlignment="center"
+             android:textColor="#7C7C7C"
+             android:textSize="16sp" />
+
+         <RadioButton
+             android:id="@+id/female_btn"
+             android:layout_width="150dp"
+             android:fontFamily="@font/lato"
+             android:layout_height="wrap_content"
+             android:layout_marginRight="15sp"
+             android:backgroundTint="#F36767"
+             android:buttonTint="#F36767"
+             android:textAlignment="center"
+             android:text="Female"
+             android:textColor="#7C7C7C"
+             android:textSize="16sp" />
+
+     </RadioGroup>
+
+    <Button
+        android:id="@+id/bday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="Birthdate"
+        android:fontFamily="@font/lato"
+        android:textColor="@color/gray"
+        app:backgroundTint="#FFFFFF"
+        android:textAlignment="textStart" />
+
+    <EditText
+        android:id="@+id/registeredEmail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:fontFamily="@font/lato"
+        android:hint="Email address"
+        android:paddingLeft="15dp"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/pass_id_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="0.946" />
+
+    <EditText
+        android:id="@+id/registeredPass"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:fontFamily="@font/lato"
+        android:hint="Password"
+        android:paddingLeft="15dp"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+     <CheckBox
+         android:id="@+id/checkBox"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="50dp"
+         android:layout_marginEnd="50dp"
+         android:layout_marginBottom="15dp"
+         android:backgroundTint="#F36767"
+         android:buttonTint="#F36767"
+         android:text="I agree to the Terms of Service and Privacy Policy"
+         android:textColor="#686868"
+         android:textSize="14sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.2"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/doctor_password" />
+
+
+     <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#F36767"
+        android:fontFamily="sans-serif-medium"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_patient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/lato"
+        android:text="Already have an account?"
+        android:textColor="#9C9C9C"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_patient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/goToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        style="?android:attr/borderlessButtonStyle"
+        android:clickable="true"
+        android:text="Click here to Login"
+        android:textColor="#F36767"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</LinearLayout>
+
+</ScrollView>

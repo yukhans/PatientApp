@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".KeyUpdate">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/updateKey"
+                android:transitionName="transTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Update My Key"
+                android:textColor="@color/black"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="30dp"
+                android:padding="0dp"
+                android:textColorHint="#a8a8a8"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                app:hintTextColor="@color/gray"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/update_pastkey"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/rounded_corner"
+                    android:ems="10"
+                    android:fontFamily="@font/lato"
+                    android:hint="Current Key"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:paddingLeft="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="10dp"
+                android:padding="0dp"
+                android:textColorHint="#a8a8a8"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                app:hintTextColor="@color/gray"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/update_newkey"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/rounded_corner"
+                    android:ems="10"
+                    android:fontFamily="@font/lato"
+                    android:hint="New Key"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:paddingLeft="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="10dp"
+                android:padding="0dp"
+                android:textColorHint="#a8a8a8"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                app:hintTextColor="@color/gray"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/update_confirmkey"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/rounded_corner"
+                    android:ems="10"
+                    android:fontFamily="@font/lato"
+                    android:hint="Confirm Key"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:paddingLeft="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/confirmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="20dp"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:backgroundTint="@color/white"
+                android:fontFamily="sans-serif-medium"
+                android:minHeight="48dp"
+                android:text="SAVE"
+                android:textAllCaps="false"
+                android:textColor="#F36767" />
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#FFFFFF"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="true"
+                android:text="BACK TO PROFILE"
+                android:visibility="visible"
+                android:textColor="#F36767" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

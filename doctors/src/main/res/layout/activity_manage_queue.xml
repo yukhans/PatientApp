@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/queueBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Manage Queue"
+            android:textColor="@color/black"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:transitionName="transTitle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cqueueBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/queue_smaller"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:minHeight="48dp"
+            android:paddingVertical="20dp"
+            android:text="MY CURRENT QUEUE"
+            android:textAllCaps="false"
+            android:textColor="@color/light_salmon" />
+
+        <Button
+            android:id="@+id/cardCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/patient_smaller"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:minHeight="48dp"
+            android:paddingVertical="20dp"
+            android:text="MY CURRENT PATIENT"
+            android:textAllCaps="false"
+            android:textColor="@color/light_salmon" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".80"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:minHeight="48dp"
+            android:text="CANCEL SELECTED BOOKING"
+            android:textAllCaps="false"
+            android:textColor="#F36767"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/refreshBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/refreshBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginVertical="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_weight=".20"
+            android:backgroundTint="@color/dark_salmon"
+            android:clickable="true"
+            app:elevation="4dp"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:rippleColor="@color/white"
+            app:srcCompat="@android:drawable/ic_popup_sync" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/noqueueText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="20dp"
+            android:backgroundTint="@color/pale_pink"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:fontFamily="@font/montserrat"
+                android:text="No patients in queue."
+                android:textColor="@color/dark_gray"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/recycler_queue">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/anonymous_pro</item>
+        <item>@font/archivo_black</item>
+        <item>@font/biryani_extralight</item>
+        <item>@font/biryani_light</item>
+        <item>@font/lato</item>
+        <item>@font/lato_thin</item>
+        <item>@font/montserrat</item>
+        <item>@font/open_sans_light</item>
+        <item>@font/pontano_sans</item>
+        <item>@font/roboto_thin</item>
+        <item>@font/work_sans</item>
+    </array>
+</resources>

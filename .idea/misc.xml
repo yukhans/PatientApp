@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable-v24/bg_hd_form.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/bg_light_salmon.xml" value="0.34444444444444444" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/bg_white.xml" value="0.30364583333333334" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/btn_circle.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/calendar_selected_bg.xml" value="0.3574074074074074" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/chat_received_bubble.xml" value="0.31979166666666664" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/chat_sent_bubble.xml" value="0.31979166666666664" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/example_3_today_bg.xml" value="0.29583333333333334" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_chat_small.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_chevron_end.xml" value="0.29583333333333334" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_edit.xml" value="0.28489583333333335" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_history.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_home.xml" value="0.31435897435897436" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_launcher_background.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_logout.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_menu.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_notif.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_profile.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/ic_sad.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/patient_smaller.xml" value="0.3675925925925926" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/queue_smaller.xml" value="0.3675925925925926" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/rounded_button.xml" value="0.31979166666666664" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/rounded_corner.xml" value="0.31979166666666664" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/sample_three_icons.xml" value="0.29583333333333334" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/drawable/scan_smaller.xml" value="0.3880208333333333" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/anonymous_pro.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/archivo_black.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/biryani_extralight.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/biryani_light.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/lato.xml" value="0.40208333333333335" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/lato_thin.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/montserrat.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/font/open_sans_light.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_calendar.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_chat.xml" value="0.371875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_chat_messages.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_current_patient.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_current_queue.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_doctor_dashboard.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_doctor_login.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_doctor_profile.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_history.xml" value="0.303125" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_main.xml" value="0.13069908814589665" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_manage_queue.xml" value="0.34057971014492755" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_on_notif.xml" value="0.30520833333333336" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_update_key.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_update_profile.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/activity_update_schedule.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/alertdialog_updatename.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/calendar_day_layout.xml" value="0.2796875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/calendar_day_legend.xml" value="0.34057971014492755" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/calendar_header.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/calendar_layout.xml" value="0.303125" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/chat_received.xml" value="0.30364583333333334" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/chat_sent.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_calendar.xml" value="0.13069908814589665" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_chat.xml" value="0.371875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_chat_messages.xml" value="0.3211050724637681" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_current_patient.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_current_queue.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_history.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_manage_queue.xml" value="0.34057971014492755" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_profile.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_profile_update.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_update_key.xml" value="0.2994791666666667" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/drawer_update_schedule.xml" value="0.371875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/example_3_calendar_header.xml" value="0.25" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/fragment_history_day.xml" value="0.371875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/fragment_history_month.xml" value="0.303125" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/fragment_history_week.xml" value="0.33" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/hd_form1.xml" value="0.3401268115942029" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/hd_form2.xml" value="0.3401268115942029" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/hd_form3.xml" value="0.3401268115942029" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/hd_form4.xml" value="0.2318840579710145" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/ic_edit.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/nav_header.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/qr_scan.xml" value="0.30364583333333334" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/recycler_chat.xml" value="0.371875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/layout/recycler_queue.xml" value="0.3446557971014493" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/menu/nav_menu.xml" value="0.175" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/menu/nav_menu_dashboard.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/doctors/src/main/res/menu/toolbar.xml" value="0.371875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/patients/src/main/res/layout/activity_book_appointment.xml" value="0.303125" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/patients/src/main/res/layout/activity_patient_login.xml" value="0.2921875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/patients/src/main/res/layout/activity_patient_profile.xml" value="0.26875" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/patients/src/main/res/layout/edit_patient_info.xml" value="0.303125" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/patients/src/main/res/layout/nav_header.xml" value="0.303125" />
+        <entry key="..\:/SCHOOL/thesis/PatientApp/PatientApp/patients/src/main/res/menu/nav_menu.xml" value="0.303125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

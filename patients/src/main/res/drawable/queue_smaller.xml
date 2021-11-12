@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/queue"
+        android:width="90dp"
+        android:height="90dp"
+        android:gravity="right"/>
+
+</layer-list>

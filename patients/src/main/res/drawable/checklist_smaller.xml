@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/checklist"
+        android:width="85dp"
+        android:height="90dp"
+        android:gravity="center"/>
+
+</layer-list>

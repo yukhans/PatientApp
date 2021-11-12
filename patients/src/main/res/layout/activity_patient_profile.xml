@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.patientapp.PatientProfile">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingTop="15dp">
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/image"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/namenote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="#F36767"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="Name"
+                android:fontFamily="@font/pontano_sans"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_fullname"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="----------"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/pontano_sans"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="Birthdate"
+                android:fontFamily="@font/pontano_sans"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_bday"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="----------"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/pontano_sans"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/updateBday"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="0dp"
+                android:background="@color/white"
+                app:iconTint="#F36767"
+                android:drawableStart="@drawable/ic_edit"
+                app:iconSize="25dp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="Sex"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/pontano_sans"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_sex"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="----------"
+                android:fontFamily="@font/pontano_sans"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/updateGender"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="0dp"
+                android:background="@color/white"
+                app:iconTint="#F36767"
+                android:drawableStart="@drawable/ic_edit"
+                app:iconSize="25dp" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/pontano_sans"
+                android:text="Email"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="----------"
+                android:fontFamily="@font/pontano_sans"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:itemTextAppearance="@style/NewFontStyle"
+        app:menu="@menu/nav_menu" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

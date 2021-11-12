@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".Screening_q1"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <ScrollView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="30dp"
+            android:background="@drawable/bg_hd_form"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Q1. Do you have any of the following symptoms within the past 14 days?"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textSize="17sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+
+                <CheckBox
+                    android:id="@+id/q1_yes"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <CheckBox
+                    android:id="@+id/q1_no"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Respiratory symptoms"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <CheckBox
+                    android:id="@+id/resSymptoms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Cough/Colds/Throat pain/Shortness of breath"/>
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status of Respiratory Symptoms"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/worsening"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Worsening"
+                        android:textSize="16sp"/>
+
+                    <CheckBox
+                        android:id="@+id/stable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Stable/Improving"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Influenza-like symptoms"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <CheckBox
+                    android:id="@+id/influenza"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Headache/Body or muscle pain/Diarrhea with or without vomiting/Weakness/Lack of smell or taste"/>
+
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fever"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <CheckBox
+                    android:id="@+id/fever"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="38 degrees Celsius or higher"/>
+
+
+
+                    <Button
+                        android:visibility="gone"
+                        android:layout_gravity="right"
+                        android:id="@+id/nextBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="sans-serif-medium"
+                        android:minHeight="48dp"
+                        android:text="NEXT"
+                        android:background="@color/white"
+                        android:textColor="#F36767" />
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</ScrollView>

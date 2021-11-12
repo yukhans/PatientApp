@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".Screening_q2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <ScrollView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="30dp"
+            android:background="@drawable/bg_hd_form"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Q2. Do you have any unprotected close contact with a covid-19 case?"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textSize="17sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="15dp">
+
+                    <CheckBox
+                        android:id="@+id/q2_yes"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+
+                    <CheckBox
+                        android:id="@+id/q2_no"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:textAllCaps="true"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/wereyou"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Were you tested for COVID-19?"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+                <CheckBox
+                    android:id="@+id/tested_yes"
+                    android:visibility="gone"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="YES"
+                    android:layout_marginBottom="5dp"/>
+
+                <CheckBox
+                    android:id="@+id/tested_no"
+                    android:visibility="gone"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NO, Have you completed 14 days of quarantine?"/>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/completequarantinegroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp">
+
+                    <CheckBox
+                        android:id="@+id/complete_yes"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="YES"
+                        android:textSize="16sp"/>
+
+                    <CheckBox
+                        android:id="@+id/complete_no"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:visibility="gone"
+                    android:layout_gravity="right"
+                    android:id="@+id/nextBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:minHeight="48dp"
+                    android:text="next"
+                    android:background="@color/white"
+                    android:textColor="#F36767" />
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</ScrollView>
