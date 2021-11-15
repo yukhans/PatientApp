@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.media.Image
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.*
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -16,11 +18,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.marginRight
+import androidx.core.view.setPadding
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_current_queue.*
 import kotlinx.android.synthetic.main.activity_current_queue.cardCurrent
+import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -229,6 +234,7 @@ class CurrentQueue : AppCompatActivity() {
         var counter = 0
         queueMap.forEach    { patient ->
             val dtSplit = patient.key.split("-")
+
             patientDatabase = FirebaseDatabase.getInstance().getReference("Users").child(patient.value)
             // call function to create cardview for queue
             patientDatabase.get().addOnSuccessListener { snapshot ->
@@ -240,7 +246,13 @@ class CurrentQueue : AppCompatActivity() {
                         val date = i.child("date").value.toString()
                         val reason = i.child("reason").value.toString()
                         val spec = i.child("spec").value.toString()
-                        addCard(queueView, context, "Patient #$counter", name, slot, date, "Reason: $reason", spec)
+                        val state =
+                            if(i.child("fillUpTime").exists())  {
+                                "pass"
+                            }   else  {
+                                "fail"
+                            }
+                        addCard(queueView, context, "Patient #$counter", name, slot, date, "Reason: $reason", spec, state)
                     }
                 }
             }
@@ -567,7 +579,7 @@ class CurrentQueue : AppCompatActivity() {
     }
 
     // function to add patient as card
-    private fun addCard(layout: LinearLayout, context: Context, titleStr: String, nameStr: String, slotStr: String, dateStr: String, reasonStr: String, specStr: String) {
+    private fun addCard(layout: LinearLayout, context: Context, titleStr: String, nameStr: String, slotStr: String, dateStr: String, reasonStr: String, specStr: String, stateStr: String) {
         // initialize card view
         val cardView = CardView(context)
         val layoutParams = LinearLayout.LayoutParams(
@@ -577,6 +589,9 @@ class CurrentQueue : AppCompatActivity() {
         layoutParams.setMargins(10, 40, 10, 30)
         val cardLinearLayout = LinearLayout(context)
         cardLinearLayout.orientation = LinearLayout.VERTICAL
+
+        val linearLayoutSub = LinearLayout(context)
+        linearLayoutSub.orientation = LinearLayout.HORIZONTAL
 
         cardView.setContentPadding(50, 50, 50, 50)
         cardView.layoutParams = layoutParams
@@ -599,7 +614,14 @@ class CurrentQueue : AppCompatActivity() {
         val dateFormat: LocalDate = LocalDate.of(year.toInt(), month.toInt(), day.toInt())
         val dateFormatted: String = dateFormat.format(DateTimeFormatter.ofPattern("EEEE, MMMM dd"))
 
-        // initialize textviews in card view
+        // initialize views in card view
+        val state = ImageView(context)
+        if(stateStr == "pass")  {
+            state.setImageResource(R.drawable.green_indicator_small)
+        }   else if(stateStr == "fail") {
+            state.setImageResource(R.drawable.red_indicator_small)
+        }
+
         val title = TextView(context)
         title.text = titleStr
         title.textSize = 23F
@@ -629,7 +651,12 @@ class CurrentQueue : AppCompatActivity() {
         spec.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL)
 
         // add text views to card view
-        cardLinearLayout.addView(title)
+        linearLayoutSub.addView(state)
+        linearLayoutSub.addView(title)
+
+        //cardLinearLayout.addView(state)
+        //cardLinearLayout.addView(title)
+        cardLinearLayout.addView(linearLayoutSub)
         cardLinearLayout.addView(slot)
         cardLinearLayout.addView(name)
         cardLinearLayout.addView(spec)

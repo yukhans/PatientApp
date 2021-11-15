@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/green_indicator"
+        android:width="15dp"
+        android:height="15dp"
+        android:end="15dp"
+        android:gravity="bottom|start"
+        android:top="7dp"/>
+
+</layer-list>
