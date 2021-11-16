@@ -36,6 +36,7 @@ import kotlinx.android.synthetic.main.activity_doctor_dashboard.nameText
 import kotlinx.android.synthetic.main.activity_doctor_dashboard.queueBtn
 import kotlinx.android.synthetic.main.activity_doctor_dashboard.rsnText
 import kotlinx.android.synthetic.main.activity_doctor_dashboard.slot1
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -110,14 +111,23 @@ class DoctorDashboard : AppCompatActivity() {
             incDetailsDialogForm.show()
         }
 
-        val sdf = SimpleDateFormat("yyMMdd")
+        val sdf = SimpleDateFormat("MMddyy")
         val date = sdf.format(Date())
 
         docDatabase.get().addOnSuccessListener { doctor ->
             val dateAnswered = doctor.child("hasAnsweredScreening").child("date").value.toString()
             val result = doctor.child("hasAnsweredScreening").child("result").value.toString()
 
-            if(date.toInt() < (dateAnswered.toInt()+5)) {
+            val c = Calendar.getInstance()
+            try {
+                c.time = sdf.parse(dateAnswered)
+            }   catch (e: ParseException)  {
+                e.printStackTrace()
+            }
+            c.add(Calendar.DATE, 5)
+            val newDate = sdf.format(c.time)
+
+            if(date.toInt() < newDate.toInt() && dateAnswered.toInt() != 0) {
                 scanBtn.visibility = GONE
             }   else  {
                 scanBtn.visibility = VISIBLE

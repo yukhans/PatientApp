@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -133,11 +134,42 @@ class DoctorProfile : AppCompatActivity() {
 
         // read in database if updateKey and updateSched exists
         database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
-        database.child("avgConsTime").get().addOnSuccessListener {
-            if(it.exists()) {
-                profile_consTime.text = "${it.value.toString()} minutes"
+        database.get().addOnSuccessListener {
+            if(it.child("avgConsTime").exists()) {
+                profile_consTime.text = "${it.child("avgConsTime").value.toString()} minutes"
             }   else    {
                 profile_consTime.text = "-----"
+            }
+
+            if(it.child("gracePeriod").exists())    {
+                profile_gracePrd.text = "${it.child("gracePeriod").value.toString()}"
+            }   else    {
+                profile_gracePrd.text = "5 minutes (set by default)"
+            }
+        }
+
+        updateGracePrd.setOnClickListener {
+            if(updateGPCard.visibility == VISIBLE)   {
+                updateGPCard.visibility = GONE
+            }   else if(updateGPCard.visibility == GONE) {
+                updateGPCard.visibility = VISIBLE
+            }
+
+            // initialize spinner
+            val times = resources.getStringArray(R.array.Grace_Period)
+            val timeSpinner = findViewById<Spinner>(R.id.timeSpinner)
+            if(timeSpinner != null) {
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, times)
+                timeSpinner.adapter = adapter
+            }
+
+            updateGP.setOnClickListener {
+                val gracePeriod = timeSpinner.selectedItem
+                database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                database.child("gracePeriod").setValue(gracePeriod).addOnSuccessListener {
+                    profile_gracePrd.text = gracePeriod.toString()
+                    updateGPCard.visibility = GONE
+                }
             }
         }
 

@@ -35,6 +35,15 @@
         <item>60 mins</item>
     </string-array>
 
+    <string-array name="Grace_Period">
+        <item>0 minute</item>
+        <item>1 minutes</item>
+        <item>2 minutes</item>
+        <item>3 minutes</item>
+        <item>4 minutes</item>
+        <item>5 minutes</item>
+    </string-array>
+
     <string-array name="Morning">
         <item>-</item>
         <item>08:00</item>
@@ -69,5 +78,6 @@
         <item>Emergency Care</item>
         <item>No Office Hours</item>
         <item>Personal Issues</item>
+        <item>No Show/Late Patient</item>
     </string-array>
 </resources>

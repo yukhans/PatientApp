@@ -24,6 +24,7 @@ class Screening_q2: AppCompatActivity() {
     var nowmonth = 0
     var nowday = 0
     var nowyear = 0
+    private var confirm: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -194,14 +195,26 @@ class Screening_q2: AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("messages")
         tempDatabase = FirebaseDatabase.getInstance().getReference("latestMessages")
 
-        val sdf = SimpleDateFormat("MMddyy")
-        val date = sdf.format(Date())
-
-        val sdf2 = SimpleDateFormat("yyMMdd")
-        val date2 = sdf2.format(Date())
-
+        val datesList = mutableListOf<String>()
         val bookings = mutableListOf<String>()
         val slots = mutableMapOf<String, String>()
+
+        val sdf = SimpleDateFormat("MMddyy")
+
+        val c = Calendar.getInstance()
+        c.time = Date()
+        val today = sdf.format(c.time)
+        datesList.add(today)
+
+        for(i in 1..4)  {
+            c.add(Calendar.DATE, 1)
+            datesList.add(sdf.format(c.time))
+        }
+
+        // set hasAnsweredScreening date and result
+        docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+        docDatabase.child(uid).child("hasAnsweredScreening").child("date").setValue(today)
+        docDatabase.child(uid).child("hasAnsweredScreening").child("result").setValue("fail")
 
         // remove from doctor queue
         docDatabase.get().addOnSuccessListener { doctor ->
@@ -209,64 +222,64 @@ class Screening_q2: AppCompatActivity() {
             val lastName = doctor.child("lastName").value.toString()
             val name = "$firstName $lastName"
 
-            if(doctor.child("queue").child(date).exists())  {
-                docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
-                docDatabase.child(uid).child("queue").child(date).removeValue()
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Bookings for today cancelled!", Toast.LENGTH_SHORT).show()
-                    }
-
-                docDatabase.child(uid).child("hasAnsweredScreening").child("date").setValue(date2)
-                docDatabase.child(uid).child("hasAnsweredScreening").child("result").setValue("fail")
-
-                for(i in doctor.child("queue").child(date).children) {
-                    val slot = i.key.toString()
-                    val patID = i.value.toString()
-                    bookings.add(patID)
-                    slots[slot] = patID
-                }
-
-                slots.forEach   { (slot, patientID) ->
-                    val check = "$date-$slot"
-
-                    // remove from patient bookings
-                    patientDatabase.child(patientID).get().addOnSuccessListener { patient ->
-                        if(patient.child("bookings").exists())  {
-                            for(i in patient.child("bookings").children)    {
-                                if(i.child("doctor").value.toString() == uid && i.child("date").value.toString() == date)    {
-                                    patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
-                                    patientDatabase.child(patientID).child("bookings")
-                                        .child(i.key.toString()).removeValue()
-                                        .addOnSuccessListener {
-                                            patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
-                                            patientDatabase.child(patientID).child("states").child("doctorCancelled").child("booking").setValue(i.key.toString())
-                                            patientDatabase.child(patientID).child("states").child("doctorCancelled").child("reason").setValue("Doctor failed health screening for today, $date")
-                                            patientDatabase.child(patientID).child("states").child("doctorCancelled").child("uid").setValue(uid)
-                                            patientDatabase.child(patientID).child("states").child("doctorCancelled").child("name").setValue(name)
-                                        }
-                                }
-                            }
+            for(date in datesList)  {
+                if(doctor.child("queue").child(date).exists())  {
+                    confirm = true
+                    docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+                    docDatabase.child(uid).child("queue").child(date).removeValue()
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Bookings for today and for the next 4 days cancelled!", Toast.LENGTH_SHORT).show()
                         }
+
+                    for(i in doctor.child("queue").child(date).children) {
+                        val slot = i.key.toString()
+                        val patID = i.value.toString()
+                        bookings.add(patID)
+                        slots[slot] = patID
                     }
 
-                    // delete message node
-                    database.get().addOnSuccessListener { messages ->
-                        for(i in messages.children) {
-                            val split = i.key.toString().split("-")
-                            if(split[0] == patientID && split[1] == uid)  {
-                                for(j in i.children)    {
-                                    val split2 = j.key.toString().split("-")
-                                    if(split2[0] == date)   {
-                                        database.child(i.key.toString()).child(j.key.toString()).removeValue()
+                    slots.forEach   { (slot, patientID) ->
+                        val check = "$date-$slot"
+
+                        // remove from patient bookings
+                        patientDatabase.child(patientID).get().addOnSuccessListener { patient ->
+                            if(patient.child("bookings").exists())  {
+                                for(i in patient.child("bookings").children)    {
+                                    if(i.child("doctor").value.toString() == uid && i.child("date").value.toString() == date)    {
+                                        patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
+                                        patientDatabase.child(patientID).child("bookings")
+                                            .child(i.key.toString()).removeValue()
+                                            .addOnSuccessListener {
+                                                patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
+                                                patientDatabase.child(patientID).child("states").child("doctorCancelled").child("booking").setValue(i.key.toString())
+                                                patientDatabase.child(patientID).child("states").child("doctorCancelled").child("reason").setValue("Doctor failed health screening for $date.")
+                                                patientDatabase.child(patientID).child("states").child("doctorCancelled").child("uid").setValue(uid)
+                                                patientDatabase.child(patientID).child("states").child("doctorCancelled").child("name").setValue(name)
+                                            }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    // delete in latest messages node
-                    tempDatabase.child(uid).child("$patientID-$check").removeValue()
-                    tempDatabase.child(patientID).child("$uid-$check").removeValue()
+                        // delete message node
+                        database.get().addOnSuccessListener { messages ->
+                            for(i in messages.children) {
+                                val split = i.key.toString().split("-")
+                                if(split[0] == patientID && split[1] == uid)  {
+                                    for(j in i.children)    {
+                                        val split2 = j.key.toString().split("-")
+                                        if(split2[0] == date)   {
+                                            database.child(i.key.toString()).child(j.key.toString()).removeValue()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // delete in latest messages node
+                        tempDatabase.child(uid).child("$patientID-$check").removeValue()
+                        tempDatabase.child(patientID).child("$uid-$check").removeValue()
+                    }
                 }
             }
         }

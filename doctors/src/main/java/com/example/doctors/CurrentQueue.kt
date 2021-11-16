@@ -26,6 +26,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_current_queue.*
 import kotlinx.android.synthetic.main.activity_current_queue.cardCurrent
 import java.lang.Math.abs
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -42,6 +43,8 @@ class CurrentQueue : AppCompatActivity() {
     private lateinit var patientDatabase: DatabaseReference
     private lateinit var database: DatabaseReference
     private lateinit var tempDatabase: DatabaseReference
+
+    private var GRACE_PERIOD: Int = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,6 +150,15 @@ class CurrentQueue : AppCompatActivity() {
 
         val context = this
 
+        // set grace period
+        docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+        docDatabase.child(id.toString()).get().addOnSuccessListener { doc ->
+            if(doc.child("gracePeriod").exists())   {
+                val gracePrdDB = doc.child("gracePeriod").value.toString().filter { it.isDigit() }
+                GRACE_PERIOD = gracePrdDB.toInt()
+            }
+        }
+
         // set views
         refresh(context, id.toString())
 
@@ -238,6 +250,17 @@ class CurrentQueue : AppCompatActivity() {
             patientDatabase = FirebaseDatabase.getInstance().getReference("Users").child(patient.value)
             // call function to create cardview for queue
             patientDatabase.get().addOnSuccessListener { snapshot ->
+                val isArrived =
+                    if(snapshot.child("states").child("isArrived").exists())    {
+                        if(snapshot.child("states").child("isArrived").value == "true") {
+                            "true"
+                        }   else    {
+                            "false"
+                        }
+                    }   else    {
+                        "false"
+                    }
+
                 for(i in snapshot.child("bookings").children)   {
                     if(i.child("doctor").value.toString() == id && !(i.child("endTime").exists()) && i.child("date").exists() && i.child("date").value.toString() == dtSplit[0] && i.child("timeslot").value.toString() == dtSplit[1])    {
                         counter++
@@ -247,11 +270,12 @@ class CurrentQueue : AppCompatActivity() {
                         val reason = i.child("reason").value.toString()
                         val spec = i.child("spec").value.toString()
                         val state =
-                            if(i.child("fillUpTime").exists())  {
+                            if(i.child("fillUpTime").exists() && isArrived == "true")  {
                                 "pass"
                             }   else  {
                                 "fail"
                             }
+
                         addCard(queueView, context, "Patient #$counter", name, slot, date, "Reason: $reason", spec, state)
                     }
                 }
@@ -384,6 +408,12 @@ class CurrentQueue : AppCompatActivity() {
 
         // updating current queue
         docDatabase.get().addOnSuccessListener { doc ->
+            val firstName = doc.child("firstName").value.toString()
+            val lastName = doc.child("lastName").value.toString()
+            val spec = doc.child("spec").value.toString()
+            val sex = doc.child("sex").value.toString()
+            val schedule = doc.child("schedule").value.toString()
+            val consTime = doc.child("avgConsTime").value.toString().toInt()
             val dateAnswered = doc.child("hasAnsweredScreening").child("date").value.toString().toInt()
             val result = doc.child("hasAnsweredScreening").child("result").value.toString()
 
@@ -432,9 +462,24 @@ class CurrentQueue : AppCompatActivity() {
                                 val d = i.child("date").value.toString()
                                 val s = i.child("timeslot").value.toString()
                                 val check = "$d-$s"
+                                val state =
+                                    if(i.child("fillUpTime").exists())  {
+                                        "pass"
+                                    }   else  {
+                                        "fail"
+                                    }
+
+                                val startSplit = s.split(":")
+                                val endSplit = currentTime.split(":")
+                                val diff =
+                                    if (startSplit[0] == endSplit[0]) {
+                                        endSplit[1].toInt() - startSplit[1].toInt()
+                                    }   else {
+                                        (60 - startSplit[1].toInt()) + endSplit[1].toInt()
+                                    }
 
                                 if (doc.child("queue").child(d).child(s).value.toString() == p.key.toString()) {
-                                    if (d == currentDate) {
+                                    if (d == currentDate && state == "pass" && diff <= GRACE_PERIOD) {
                                         //counter++
                                         val startDialog = androidx.appcompat.app.AlertDialog.Builder(this@CurrentQueue, R.style.AlertDialog)
                                                 .setTitle("Start Session")
@@ -451,6 +496,23 @@ class CurrentQueue : AppCompatActivity() {
                                                 }
                                                 .setNeutralButton("NO") { _, _ -> }
                                         startDialog.show()
+                                    }   else if(d == currentDate)    {
+                                        if(diff <= GRACE_PERIOD && state == "fail")    {
+                                            val startDialog = androidx.appcompat.app.AlertDialog.Builder(this@CurrentQueue, R.style.AlertDialog)
+                                                .setTitle("Start Session")
+                                                .setMessage("The next patient is still not ready to be served. $diff minutes has passed since their booked timeslot.")
+                                                .setNeutralButton("OK") { _, _ -> }
+                                            startDialog.show()
+                                        }   else    {
+                                            val startDialog = androidx.appcompat.app.AlertDialog.Builder(this@CurrentQueue, R.style.AlertDialog)
+                                                .setTitle("Start Session")
+                                                .setMessage("The next patient is late for their appointment. $diff minutes has passed since their booked timeslot.")
+                                                .setPositiveButton("CANCEL THEIR BOOKING") { _, _ ->
+                                                    val intentManage = Intent(this, ManageQueue::class.java)
+                                                    passData(intentManage, id, firstName, lastName, spec, sex, schedule, consTime)
+                                                }
+                                            startDialog.show()
+                                        }
                                     }   else {      // if next patient is not scheduled for current date
                                         val dialog = androidx.appcompat.app.AlertDialog.Builder(this@CurrentQueue, R.style.AlertDialog)
                                             .setTitle("Patient not scheduled for today.")
@@ -654,8 +716,6 @@ class CurrentQueue : AppCompatActivity() {
         linearLayoutSub.addView(state)
         linearLayoutSub.addView(title)
 
-        //cardLinearLayout.addView(state)
-        //cardLinearLayout.addView(title)
         cardLinearLayout.addView(linearLayoutSub)
         cardLinearLayout.addView(slot)
         cardLinearLayout.addView(name)
