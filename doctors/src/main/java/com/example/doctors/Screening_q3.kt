@@ -18,7 +18,7 @@ class Screening_q3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hd_form3)
 
-        supportActionBar?.title = "Patient Screening Form"
+        supportActionBar?.title = "Doctor Screening Form"
         supportActionBar?.subtitle = "Question 3"
 
         //get date today

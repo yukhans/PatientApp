@@ -244,9 +244,9 @@ class ScheduleUpdate : AppCompatActivity() {
 
                 if(check==4)    {
                     // for loop to check each item of schedOverview
-                    for(i in 0..schedOverview.childCount)   {
-                        if(schedOverview.getChildAt(i) != null) {
-                            val schedID = schedOverview.getChildAt(i).id
+                    for(i in 0..CTOverview.childCount)   {
+                        if(CTOverview.getChildAt(i) != null) {
+                            val schedID = CTOverview.getChildAt(i).id
                             val schedString = findViewById<Chip>(schedID).text.toString()         // extract text of schedOverview child
                             val schedList: List<String> = schedString.split(": ")       // split text of schedOverview child
 
@@ -259,25 +259,25 @@ class ScheduleUpdate : AppCompatActivity() {
                     // add set schedule as chips
                     when (findViewById<Chip>(chipSched.checkedChipId).text.toString()) {
                         "Monday" -> {
-                            schedOverview.addChip(this, "Monday: $timeString")
+                            CTOverview.addChip(this, "Monday: $timeString")
                         }
                         "Tuesday" -> {
-                            schedOverview.addChip(this, "Tuesday: $timeString")
+                            CTOverview.addChip(this, "Tuesday: $timeString")
                         }
                         "Wednesday" -> {
-                            schedOverview.addChip(this, "Wednesday: $timeString")
+                            CTOverview.addChip(this, "Wednesday: $timeString")
                         }
                         "Thursday" -> {
-                            schedOverview.addChip(this, "Thursday: $timeString")
+                            CTOverview.addChip(this, "Thursday: $timeString")
                         }
                         "Friday" -> {
-                            schedOverview.addChip(this, "Friday: $timeString")
+                            CTOverview.addChip(this, "Friday: $timeString")
                         }
                         "Saturday" -> {
-                            schedOverview.addChip(this, "Saturday: $timeString")
+                            CTOverview.addChip(this, "Saturday: $timeString")
                         }
                         "Sunday" -> {
-                            schedOverview.addChip(this, "Sunday: $timeString")
+                            CTOverview.addChip(this, "Sunday: $timeString")
                         }
                     }
                 }
@@ -294,7 +294,7 @@ class ScheduleUpdate : AppCompatActivity() {
 
             // schedOverview = chip group of inputted schedule
             // if schedOverview is not empty, save schedule to database
-            if(schedOverview.childCount > 0 && !(avgTime.isNullOrBlank())) {
+            if(CTOverview.childCount > 0 && !(avgTime.isNullOrBlank())) {
 
                 val updateConsTime = mapOf(
                     "avgConsTime" to avgTime.toInt()
@@ -307,14 +307,21 @@ class ScheduleUpdate : AppCompatActivity() {
                 val schedArray = mutableListOf<String>()
 
                 // for loop to check each item of schedOverview
-                for(i in 0..schedOverview.childCount)   {
-                    if(schedOverview.getChildAt(i) != null) {
-                        val schedID = schedOverview.getChildAt(i).id
+                for(i in 0..CTOverview.childCount)   {
+                    if(CTOverview.getChildAt(i) != null) {
+                        val schedID = CTOverview.getChildAt(i).id
                         val schedString = findViewById<Chip>(schedID).text.toString()         // extract text of schedOverview child
                         val schedList: List<String> = schedString.split(": ")       // split text of schedOverview child
 
-                        // call function to make time slots in database
-                        divideTimeSlot(id.toString(), schedList[0], schedList[1], avgTime.toInt())
+                        database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                        database.child("timeSlot").get().addOnSuccessListener { dayDB ->
+                            database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                            // remove node in database if it exists
+                            database.child("timeSlot").child(schedList[0]).removeValue()
+
+                            // call function to make time slots in database
+                            divideTimeSlot(id.toString(), schedList[0], schedList[1], avgTime.toInt())
+                        }
 
                         // call function to update current schedule
                         updateSched(id.toString(), schedList[0], schedList[1])        // get(0) = day, get(1) = time string
@@ -431,9 +438,9 @@ class ScheduleUpdate : AppCompatActivity() {
                 updateTimeSlot(id, slotStart.toString(), day)
                 slotStart = slotStart.plusMinutes(consTime.toLong())
             }
-
-            //deleteTimeSlot(id, slotArray, day)
         }
+
+        // PM time slots
         if(split[4].isNotBlank() && split[5].isNotBlank() && split[6].isNotBlank() && split[7].isNotBlank())    {
             var slotStart: LocalTime = LocalTime.of(split[4].toInt(), split[5].toInt())
             val slotEnd: LocalTime = LocalTime.of(split[6].toInt(), split[7].toInt())
@@ -481,7 +488,7 @@ class ScheduleUpdate : AppCompatActivity() {
             database.child(i).get().addOnSuccessListener { snapshot ->
                 if(snapshot.exists())   {
                     // if day is found, add day and value to chip group
-                    schedOverview.addChip(context, "$i: ${snapshot.getValue<String>().toString()}")
+                    CTOverview.addChip(context, "$i: ${snapshot.getValue<String>().toString()}")
                 }
             }
         }

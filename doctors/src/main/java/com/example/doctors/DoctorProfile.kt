@@ -3,21 +3,25 @@ package com.example.doctors
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.*
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import kotlinx.android.synthetic.main.activity_doctor_profile.*
+import kotlinx.android.synthetic.main.activity_doctor_profile.preview
 import kotlinx.android.synthetic.main.activity_doctor_profile.updateKey
+import kotlinx.android.synthetic.main.activity_doctor_profile.updateSchedule
 
 class DoctorProfile : AppCompatActivity() {
     // layout properties
@@ -146,29 +150,179 @@ class DoctorProfile : AppCompatActivity() {
             }   else    {
                 profile_gracePrd.text = "5 minutes (set by default)"
             }
+
+            if(it.child("clinicConfig").exists())    {
+                profile_cconfig.text = "${it.child("clinicConfig").child("cconfigStr").value.toString()}"
+            }   else    {
+                profile_cconfig.text = "-----"
+            }
         }
 
         updateGracePrd.setOnClickListener {
+            chipsGP.removeAllViews()
             if(updateGPCard.visibility == VISIBLE)   {
                 updateGPCard.visibility = GONE
             }   else if(updateGPCard.visibility == GONE) {
                 updateGPCard.visibility = VISIBLE
             }
 
+            // initialize chip group
+            database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+            database.get().addOnSuccessListener { doc ->
+                val gracePeriodSelection =
+                    if(doc.child("avgConsTime").value.toString().toInt() == 0)
+                        5
+                    else
+                        ((doc.child("avgConsTime").value.toString()).filter { it.isDigit() }).toInt()
+
+                for(i in 1..gracePeriodSelection)    {
+                    chipsGP.addChip(this, "$i mins")
+                }
+
+                updateGP.setOnClickListener {
+                    val gracePeriod = findViewById<Chip>(chipsGP.checkedChipId).text.toString()
+
+                    database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                    database.child("gracePeriod").setValue(gracePeriod).addOnSuccessListener {
+                        profile_gracePrd.text = gracePeriod
+                        updateGPCard.visibility = GONE
+                    }
+                }
+            }
+        }
+
+        updateConsType.setOnClickListener {
+            if(updateConsTypeCard.visibility == VISIBLE) {
+                updateConsTypeCard.visibility = GONE
+            }   else if(updateConsTypeCard.visibility == GONE)   {
+                updateConsTypeCard.visibility = VISIBLE
+            }
+
+            okCT.setOnClickListener {
+                updateCT2.visibility = VISIBLE
+                val constypeAmtStr = constypeAmt.text.toString().toInt()
+
+                // initialize chip group
+                for(i in 1..constypeAmtStr)    {
+                    chipsCT.addChip(this, "Type #$i")
+                }
+
+                saveCT.setOnClickListener {
+                    val constypeStr = constype.text.toString()
+                    val constypeTimeInt = constypeTime.text.toString().toInt()
+
+                    if(CTOverview.childCount < constypeAmtStr)  {
+                        CTOverview.addChip2(this, "$constypeStr: $constypeTimeInt")
+                    }   else    {
+                        Toast.makeText(this, "Reached Maximum Consultation Types of $constypeAmtStr", Toast.LENGTH_LONG).show()
+                    }
+
+                    constype.text.clear()
+                    constypeTime.text.clear()
+                }
+            }
+
+            updateCT.setOnClickListener {
+                for(i in 0..CTOverview.childCount) {
+                    if(chipsCT.getChildAt(i) != null)   {
+                        val chipID = CTOverview.getChildAt(i).id
+                        val chipStr = findViewById<Chip>(chipID).text.toString()
+                        val chipList: List<String> = chipStr.split(": ")
+
+                        database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                        database.child("consultationType").child(((i.toString().toInt())+1).toString()).child("consStr").setValue(chipList[0]).addOnSuccessListener {
+                            constypeAmt.text.clear()
+                        }
+                        database.child("consultationType").child(((i.toString().toInt())+1).toString()).child("consTime").setValue(chipList[1]).addOnSuccessListener {
+                            updateConsTypeCard.visibility = GONE
+                        }
+                    }
+                }
+
+                database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                database.child("consultationType").get().addOnSuccessListener {
+                    for(i in it.children)   {
+                        val str = i.child("consStr").value.toString()
+                        val amt = i.child("consTime").value.toString()
+                        profileCT.addText(this, "$str: $amt mins")
+                    }
+                }
+            }
+        }
+
+        updateCconfig.setOnClickListener {
+            if(updateCconfigCard.visibility == VISIBLE) {
+                updateCconfigCard.visibility = GONE
+            }   else if(updateCconfigCard.visibility == GONE)   {
+                updateCconfigCard.visibility = VISIBLE
+            }
+
             // initialize spinner
-            val times = resources.getStringArray(R.array.Grace_Period)
-            val timeSpinner = findViewById<Spinner>(R.id.timeSpinner)
+            val times = resources.getStringArray(R.array.delay_time)
+            val timeSpinner = findViewById<Spinner>(R.id.CConfigSpinner_time)
             if(timeSpinner != null) {
                 val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, times)
                 timeSpinner.adapter = adapter
             }
 
-            updateGP.setOnClickListener {
-                val gracePeriod = timeSpinner.selectedItem
-                database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
-                database.child("gracePeriod").setValue(gracePeriod).addOnSuccessListener {
-                    profile_gracePrd.text = gracePeriod.toString()
-                    updateGPCard.visibility = GONE
+            // initialize chip select
+            chipCConfig.setOnCheckedChangeListener { _, checkedId ->
+                preview.visibility = VISIBLE
+
+                if(checkedId==-1)   {
+                    preview.text = "No clinic configuration selected."
+                }   else    {
+                    val cconfig = findViewById<Chip>(checkedId).text.toString()
+                    preview.text = "$cconfig Clinic Configuration"
+
+                    if(cconfig == "Building")   {
+                        forBuilding.visibility = VISIBLE
+                        cconfig_walkingtime.visibility = VISIBLE
+
+                        updateCC.setOnClickListener {
+                            val maxCap = CConfig_cap.text.toString()
+                            val walkingTime = (timeSpinner.selectedItem.toString()).filter { it.isDigit() }
+                            val roomNumber = CConfig_room.text.toString()
+                            val floorNumber = CConfig_floor.text.toString()
+                            val cconfigStr = "Clinic is in a $cconfig, Waiting Room Max Cap: $maxCap, Floor #$floorNumber, Room #$roomNumber, Walking Time from Entrance: $walkingTime mins"
+
+                            val updateClinicConfig = mapOf(
+                                "cconfigStr" to cconfigStr,
+                                "maxCap" to maxCap,
+                                "walkingTime" to walkingTime,
+                                "roomNumber" to roomNumber,
+                                "floorNumber" to floorNumber,
+                                "currWaitingCount" to 0
+                            )
+
+                            database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                            database.child("clinicConfig").updateChildren(updateClinicConfig).addOnSuccessListener {
+                                profile_cconfig.text = cconfigStr
+                                updateCconfigCard.visibility = GONE
+                            }
+                        }
+                    }   else if(cconfig == "Standalone")    {
+                        forBuilding.visibility = GONE
+                        cconfig_walkingtime.visibility = GONE
+
+                        updateCC.setOnClickListener {
+                            val maxCap = CConfig_cap.text.toString()
+                            val cconfigStr = "Clinic is a $cconfig, Waiting Room Max Cap: $maxCap"
+
+                            val updateClinicConfig = mapOf(
+                                "cconfigStr" to cconfigStr,
+                                "maxCap" to maxCap,
+                                "walkingTime" to 0,
+                                "currWaitingCount" to 0
+                            )
+
+                            database = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                            database.child("clinicConfig").updateChildren(updateClinicConfig).addOnSuccessListener {
+                                profile_cconfig.text = cconfigStr
+                                updateCconfigCard.visibility = GONE
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -296,11 +450,39 @@ class DoctorProfile : AppCompatActivity() {
         }
     }
 
+    // function to add textview to linear layout
     fun LinearLayout.addText(context: Context, title: String)  {
         TextView(context).apply {
             id = generateViewId()
             text = title
             addView(this)
+        }
+    }
+
+    // function to add chip to chip group
+    fun ChipGroup.addChip(context: Context, title: String)  {
+        Chip(context).apply {
+            id = generateViewId()
+            text = title
+            isCheckable = true
+            isClickable = true
+            isCheckedIconVisible = true
+            isChipIconVisible = true
+            addView(this)
+        }
+    }
+
+    // function to add chip to chip group 2
+    fun ChipGroup.addChip2(context: Context, title: String)  {
+        Chip(context).apply {
+            id = generateViewId()
+            text = title
+            isCloseIconVisible = true
+            performCloseIconClick()
+            addView(this)
+            setOnCloseIconClickListener {
+                removeView(this)
+            }
         }
     }
 

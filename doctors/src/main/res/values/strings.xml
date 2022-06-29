@@ -36,7 +36,6 @@
     </string-array>
 
     <string-array name="Grace_Period">
-        <item>0 minute</item>
         <item>1 minutes</item>
         <item>2 minutes</item>
         <item>3 minutes</item>
@@ -79,5 +78,28 @@
         <item>No Office Hours</item>
         <item>Personal Issues</item>
         <item>No Show/Late Patient</item>
+    </string-array>
+
+    <string-array name="delay_time">
+        <item>1 min</item>
+        <item>2 mins</item>
+        <item>3 mins</item>
+        <item>4 mins</item>
+        <item>5 mins</item>
+        <item>6 mins</item>
+        <item>7 mins</item>
+        <item>8 mins</item>
+        <item>9 mins</item>
+        <item>10 mins</item>
+        <item>11 mins</item>
+        <item>12 mins</item>
+        <item>13 mins</item>
+        <item>14 mins</item>
+        <item>15 mins</item>
+        <item>16 mins</item>
+        <item>17 mins</item>
+        <item>18 mins</item>
+        <item>19 mins</item>
+        <item>20 mins</item>
     </string-array>
 </resources>

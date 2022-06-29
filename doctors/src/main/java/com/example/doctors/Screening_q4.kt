@@ -26,7 +26,7 @@ class Screening_q4 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hd_form4)
 
-        supportActionBar?.title = "Patient Screening Form"
+        supportActionBar?.title = "Doctor Screening Form"
         supportActionBar?.subtitle = "Question 4"
 
         //get date today
@@ -486,15 +486,18 @@ class Screening_q4 : AppCompatActivity() {
 
 
         confirmBtn.setOnClickListener {
-            val sdf = SimpleDateFormat("yyMMdd")
+            val sdf = SimpleDateFormat("MMddyy")
+            val sdfTime = SimpleDateFormat("HH:mm")
             val date = sdf.format(Date())
+            val time = sdfTime.format(Date())
 
             database = FirebaseDatabase.getInstance().getReference("DOCTOR")
             database.child(uid.toString()).child("hasAnsweredScreening").child("date").setValue(date).addOnSuccessListener {
-                Toast.makeText(applicationContext,"You have passed the Patient Screening Form!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"You have passed the Health Declaration Form!", Toast.LENGTH_SHORT).show()
 
                 database = FirebaseDatabase.getInstance().getReference("DOCTOR")
                 database.child(uid.toString()).child("hasAnsweredScreening").child("result").setValue("pass")
+                database.child(uid.toString()).child("hasAnsweredScreening").child("fillUpTime").setValue(time)
 
                 val intent2 = Intent(this, DoctorDashboard::class.java)
                 intent2.putExtra("id", uid.toString())

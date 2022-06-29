@@ -9,84 +9,87 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_doctor_login.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DoctorLogin : AppCompatActivity() {
-    private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var tempDatabase: DatabaseReference
+
+    private var success = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_login)
 
-        // init firebase auth
-        firebaseAuth = FirebaseAuth.getInstance()
-
         // first check if doctor is already signed in
         loadData()
 
         loginBtn.setOnClickListener {
-            val idtext = idtext.text.toString()
-            val keytext = passtext.text.toString()
+            val idText = idtext.text.toString()
+            val keyText = passtext.text.toString()
 
-            if(idtext.isNotEmpty() && keytext.isNotEmpty()) {
-                readData(idtext, keytext, this)
+            if(idText.isNotEmpty() && keyText.isNotEmpty()) {
+                readData(idText, keyText, this)
             }   else    {
                 Toast.makeText(this, "ID or Key not provided", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun readData(idtext: String, keytext: String, context: Context) {
-        var isPasswordMatch = false
-        var getID = false
-
+    private fun readData(idText: String, keyText: String, context: Context) {
         //check if username and password exist
         database = FirebaseDatabase.getInstance().getReference("DOCTOR")
         database.get().addOnSuccessListener { doc ->
             for (doctorUserSnapShot in doc.children) {
-                if (doctorUserSnapShot.key.toString() == idtext && doctorUserSnapShot.child("pass").value.toString() == keytext) {
+                if (doctorUserSnapShot.key.toString() == idText && doctorUserSnapShot.child("pass").value.toString() == keyText) {
                     //if username and password match save data in Sharedpreferences
                     val firstName = doctorUserSnapShot.child("firstName").value.toString()
                     val lastName = doctorUserSnapShot.child("lastName").value.toString()
                     val spec = doctorUserSnapShot.child("spec").value.toString()
                     val sex = doctorUserSnapShot.child("sex").value.toString()
                     val consTime = doctorUserSnapShot.child("avgConsTime").value.toString()
-                    saveData(idtext, firstName, lastName, spec, sex, consTime.toInt())
+                    saveData(idText, firstName, lastName, spec, sex, consTime.toInt())
 
                     // change islogged in to true
                     tempDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
-                    tempDatabase.child(idtext).child("isLoggedIn").setValue(true)
+                    tempDatabase.child(idText).child("isLoggedIn").setValue(true)
 
                     // set updateSched state according to if schedule node exists under doctor id
                     if (doctorUserSnapShot.child("schedule").exists()) {
                         val schedUpdateState = mapOf(
                             "updateSched" to true
                         )
-                        tempDatabase.child(idtext).updateChildren(schedUpdateState)
+                        tempDatabase.child(idText).updateChildren(schedUpdateState)
                     } else {
                         val schedUpdateState = mapOf(
                             "updateSched" to false
                         )
-                        tempDatabase.child(idtext).updateChildren(schedUpdateState)
+                        tempDatabase.child(idText).updateChildren(schedUpdateState)
                     }
 
                     if(!(doctorUserSnapShot.child("queueCount").exists()))  {
-                        tempDatabase.child(idtext).child("queueCount").setValue(0)
+                        tempDatabase.child(idText).child("queueCount").setValue(0)
                     }
 
+                    tempDatabase.child(idText).child("patientIsLate").setValue(false)
+
+                    tempDatabase.child(idText).child("notifyFP").child("date").setValue("000000")
+                    tempDatabase.child(idText).child("notifyFP").child("value").setValue(false)
+
                     if(!(doctorUserSnapShot.child("hasAnsweredScreening").exists()))  {
-                        tempDatabase.child(idtext).child("hasAnsweredScreening").child("date").setValue(0)
-                        tempDatabase.child(idtext).child("hasAnsweredScreening").child("result").setValue("fail")
+                        tempDatabase.child(idText).child("hasAnsweredScreening").child("date").setValue("000000")
+                        tempDatabase.child(idText).child("hasAnsweredScreening").child("result").setValue("fail")
                     }
 
                     //change passwordmatch to true
-                    isPasswordMatch = true
-                    getID = true
+//                    isPasswordMatch = true
+//                    getID = true
+                    success = true
 
                     //go to next activity
                     val intent = Intent(this, DoctorDashboard::class.java)
-                    intent.putExtra("id", idtext)
+                    intent.putExtra("id", idText)
                     intent.putExtra("firstName", firstName)
                     intent.putExtra("lastName", lastName)
                     intent.putExtra("spec", spec)
@@ -95,21 +98,13 @@ class DoctorLogin : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            if(!isPasswordMatch) {
+            if(!success) {
                 val unregisteredDialogForm = AlertDialog.Builder(context, R.style.AlertDialog)
-                    .setTitle("Invalid key!")
-                    .setMessage("Please enter your correct key or contact admin.")
+                    .setTitle("Invalid ID or key!")
+                    .setMessage("Please enter your correct 8-digit ID and key or contact admin.")
                     .setNeutralButton("OK") { _, _ ->
-
-                    }
-                unregisteredDialogForm.show()
-            }
-            if(!getID)  {
-                val unregisteredDialogForm = AlertDialog.Builder(context, R.style.AlertDialog)
-                    .setTitle("Invalid ID!")
-                    .setMessage("Please enter your correct 8-digit ID or contact admin.")
-                    .setNeutralButton("OK") { _, _ ->
-
+                        idtext.setText("")
+                        passtext.setText("")
                     }
                 unregisteredDialogForm.show()
             }

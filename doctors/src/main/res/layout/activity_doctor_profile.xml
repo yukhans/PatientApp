@@ -246,15 +246,22 @@
                     android:textColor="@color/dark_gray"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/timeSpinner"
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:dropDownWidth="match_parent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown" />
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipsGP"
+                        style="@style/Widget.MaterialComponents.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:lineSpacing="2dp"
+                        app:singleSelection="true">
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
 
                 <Button
                     android:id="@+id/updateGP"
@@ -269,6 +276,417 @@
                     android:text="CONFIRM UPDATE"
                     android:visibility="visible"
                     android:textColor="#F36767" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="Clinic Configuration"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_cconfig"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="----------"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/updateCconfig"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:padding="0dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/pontano_sans"
+                    app:iconTint="#F36767"
+                    android:drawableStart="@drawable/ic_edit"
+                    app:iconSize="25dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:fontFamily="@font/pontano_sans"
+                    android:text="Consultation Types"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/profileCT"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/updateConsType"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:padding="0dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/pontano_sans"
+                    app:iconTint="#F36767"
+                    android:drawableStart="@drawable/ic_edit"
+                    app:iconSize="25dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/updateConsTypeCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/bg_light_gray"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <EditText
+                        android:id="@+id/constypeAmt"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:autoSizeMaxTextSize="8sp"
+                        android:autoSizeMinTextSize="6sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="5"
+                        android:fontFamily="@font/lato"
+                        android:hint="Amount"
+                        android:inputType="number"
+                        android:minHeight="30dp"
+                        android:paddingLeft="15dp" />
+
+                    <Button
+                        android:id="@+id/okCT"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
+                        android:clickable="true"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="OK"
+                        android:textColor="#F36767"
+                        android:transitionName="transTitle"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/updateCT2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipsCT"
+                            style="@style/Widget.MaterialComponents.ChipGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:lineSpacing="2dp"
+                            app:singleSelection="true"></com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+
+                    <EditText
+                        android:id="@+id/constype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:autoSizeMaxTextSize="8sp"
+                        android:autoSizeMinTextSize="6sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="5"
+                        android:fontFamily="@font/lato"
+                        android:hint="Consultation Type"
+                        android:inputType="text"
+                        android:minHeight="30dp"
+                        android:paddingLeft="15dp" />
+
+                    <EditText
+                        android:id="@+id/constypeTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:autoSizeMaxTextSize="8sp"
+                        android:autoSizeMinTextSize="6sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="5"
+                        android:fontFamily="@font/lato"
+                        android:hint="Consultation Time (mins)"
+                        android:inputType="number"
+                        android:minHeight="30dp"
+                        android:paddingLeft="15dp" />
+
+                    <Button
+                        android:id="@+id/saveCT"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
+                        android:clickable="true"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="SAVE"
+                        android:textColor="#F36767"
+                        android:transitionName="transTitle"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_light_gray"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/schedOverviewTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato"
+                            android:text="Overview: "
+                            android:textColor="@color/dark_gray"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:id="@+id/preview2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:background="@drawable/bg_light_gray"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/CTOverview"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            </com.google.android.material.chip.ChipGroup>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/updateCT"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
+                        android:clickable="true"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="CONFIRM UPDATE"
+                        android:textColor="#F36767"
+                        android:transitionName="transTitle"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/updateCconfigCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/bg_light_gray"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipCConfig"
+                    style="@style/Widget.MaterialComponents.ChipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:orientation="horizontal"
+                    app:lineSpacing="5dp"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/Building"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Building"
+                        app:checkedIconVisible="true"
+                        app:chipIconVisible="true" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/Standalone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Standalone"
+                        app:checkedIconVisible="true"
+                        app:chipIconVisible="true" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <EditText
+                    android:id="@+id/CConfig_cap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:autoSizeMaxTextSize="8sp"
+                    android:autoSizeMinTextSize="6sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/rounded_corner"
+                    android:ems="5"
+                    android:fontFamily="@font/lato"
+                    android:hint="Waiting Room Maximum Capacity"
+                    android:inputType="number"
+                    android:minHeight="30dp"
+                    android:paddingLeft="15dp" />
+
+                <LinearLayout
+                    android:id="@+id/forBuilding"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/CConfig_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:autoSizeMaxTextSize="8sp"
+                        android:autoSizeMinTextSize="6sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="5"
+                        android:fontFamily="@font/lato"
+                        android:hint="Room #"
+                        android:inputType="number"
+                        android:minHeight="30dp"
+                        android:paddingLeft="15dp" />
+
+                    <EditText
+                        android:id="@+id/CConfig_floor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:autoSizeMaxTextSize="8sp"
+                        android:autoSizeMinTextSize="6sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/rounded_corner"
+                        android:ems="5"
+                        android:fontFamily="@font/lato"
+                        android:hint="Floor #"
+                        android:inputType="number"
+                        android:minHeight="30dp"
+                        android:paddingLeft="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cconfig_walkingtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:text="Walking Time from Entrance" />
+
+                    <Spinner
+                        android:id="@+id/CConfigSpinner_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:dropDownWidth="match_parent"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/lato"
+                    android:text="--------"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/updateCC"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:clickable="true"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:text="CONFIRM UPDATE"
+                    android:textColor="#F36767"
+                    android:transitionName="transTitle"
+                    android:visibility="visible" />
             </LinearLayout>
 
             <Button

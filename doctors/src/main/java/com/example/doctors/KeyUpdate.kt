@@ -96,13 +96,9 @@ class KeyUpdate : AppCompatActivity() {
                     val keyUpdate = mapOf(
                         "pass" to newKey
                     )
-                    val keyUpdateState = mapOf(
-                        "updateKey" to true
-                    )
 
                     // update current key
                     database.updateChildren(keyUpdate)
-                    database.updateChildren(keyUpdateState)
                     updateKeySuccess.show()
 
                     // if new key input is different from confirm key input

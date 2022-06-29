@@ -30,7 +30,7 @@ class Screening_q1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hd_form1)
 
-        supportActionBar?.title = "Patient Screening Form"
+        supportActionBar?.title = "Doctor Screening Form"
         supportActionBar?.subtitle = "Question 1"
 
         //get date today
@@ -213,12 +213,17 @@ class Screening_q1 : AppCompatActivity() {
 
         val c = Calendar.getInstance()
         c.time = Date()
-        datesList.add(sdf.format(c.time))
+        val today = sdf.format(c.time)
+        datesList.add(today)
 
         for(i in 1..4)  {
             c.add(Calendar.DATE, 1)
             datesList.add(sdf.format(c.time))
         }
+
+        // set hasAnsweredScreening date and result
+        docDatabase.child("hasAnsweredScreening").child("date").setValue(today)
+        docDatabase.child("hasAnsweredScreening").child("result").setValue("fail")
 
         // remove from doctor queue
         docDatabase.get().addOnSuccessListener { doctor ->
@@ -233,9 +238,6 @@ class Screening_q1 : AppCompatActivity() {
                         .addOnSuccessListener {
                             Toast.makeText(this, "Bookings for today and for the next 4 days cancelled!", Toast.LENGTH_SHORT).show()
                         }
-
-                    docDatabase.child(uid).child("hasAnsweredScreening").child("date").setValue(date)
-                    docDatabase.child(uid).child("hasAnsweredScreening").child("result").setValue("fail")
 
                     for(i in doctor.child("queue").child(date).children) {
                         val slot = i.key.toString()
@@ -258,7 +260,7 @@ class Screening_q1 : AppCompatActivity() {
                                             .addOnSuccessListener {
                                                 patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
                                                 patientDatabase.child(patientID).child("states").child("doctorCancelled").child("booking").setValue(i.key.toString())
-                                                patientDatabase.child(patientID).child("states").child("doctorCancelled").child("reason").setValue("Doctor failed health screening for $date.")
+                                                patientDatabase.child(patientID).child("states").child("doctorCancelled").child("reason").setValue("Doctor failed health screening for $today.")
                                                 patientDatabase.child(patientID).child("states").child("doctorCancelled").child("uid").setValue(uid)
                                                 patientDatabase.child(patientID).child("states").child("doctorCancelled").child("name").setValue(name)
                                             }

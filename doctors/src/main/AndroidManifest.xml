@@ -72,7 +72,7 @@
             android:theme="@style/Theme.FirebaseAuth" />
         <activity
             android:name=".DoctorProfile"
-            android:theme="@style/Theme.FirebaseAuth" />
+            android:theme="@style/Theme.FirebaseAuth2" />
         <activity
             android:name=".ProfileUpdate"
             android:theme="@style/Theme.FirebaseAuth2" />
@@ -111,6 +111,9 @@
         <meta-data
             android:name="preloaded-fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver android:name=".AlarmReceiverLP" />
+        <receiver android:name=".AlarmReceiverFP" />
     </application>
 
 </manifest>

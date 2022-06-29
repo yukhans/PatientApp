@@ -1,8 +1,6 @@
 package com.example.doctors
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -11,12 +9,14 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -52,10 +52,17 @@ class DoctorDashboard : AppCompatActivity() {
     private lateinit var docDatabase: DatabaseReference
     private lateinit var patientDatabase: DatabaseReference
     private lateinit var tempDocDatabase: DatabaseReference
+    private lateinit var tempDatabase: DatabaseReference
     private lateinit var database: DatabaseReference
 
     // private storage to store booking count
     var count = 0
+
+    // for alarm
+    private lateinit var calendarFP : Calendar
+    private lateinit var alarmManager : AlarmManager
+    private lateinit var pendingIntent: PendingIntent
+    var checker = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,6 +148,49 @@ class DoctorDashboard : AppCompatActivity() {
                     scanner.addExtra("sex", sex)
                     scanner.addExtra("consTime", consTime.toString())
                     scanner.initiateScan()
+                }
+            }
+
+            if(doctor.child("notifyFP").child("date").value.toString() != date && doctor.child("notifyFP").child("value").value == false) {
+                if(doctor.child("queue").exists())  {
+                    if(doctor.child("queue").child(date).exists())  {
+                        if(doctor.child("queue").child(date).children.elementAt(0).exists())    {
+                            val firstPatientTS = doctor.child("queue").child(date).children.elementAt(0).key.toString()
+                            val firstPatientID = doctor.child("queue").child(date).children.elementAt(0).value.toString()
+                            val sdfTime = SimpleDateFormat("HH:mm")
+                            val sdfHour = SimpleDateFormat("HH")
+                            val sdfMins = SimpleDateFormat("mm")
+
+                            val c2 = Calendar.getInstance()
+                            try {
+                                c2.time = sdfTime.parse(firstPatientTS)
+                            }   catch (e: ParseException)  {
+                                e.printStackTrace()
+                            }
+
+                            c2.add(Calendar.HOUR, -1)
+                            val alarmTimeHour = sdfHour.format(c2.time).toInt()
+                            val alarmTimeMins = sdfMins.format(c2.time).toInt()
+
+                            calendarFP = Calendar.getInstance()
+                            calendarFP[Calendar.HOUR_OF_DAY] = alarmTimeHour
+                            calendarFP[Calendar.MINUTE] = alarmTimeMins
+                            calendarFP[Calendar.SECOND] = 0
+                            calendarFP[Calendar.MILLISECOND] = 0
+
+                            docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id.toString())
+                            docDatabase.child("notifyFP").child("date").setValue(date)
+
+                            // set notification channel
+                            createNotificationChannelFP()
+
+                            // set alarm
+                            firstPatientAlarm(id.toString(), firstPatientTS)
+
+                            // check if doctor can make it for their first patient
+                            firstPatientChecker(id.toString(), firstPatientID, firstPatientTS)
+                        }
+                    }
                 }
             }
         }
@@ -290,6 +340,7 @@ class DoctorDashboard : AppCompatActivity() {
     }
 
     private fun checkQueue(id: String, firstName: String, lastName: String, spec: String, sex: String, consTime: Int)    {
+        tempDocDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id)
         tempDocDatabase.get().addOnSuccessListener { doc ->
             for (i in doc.child("queue").children) {
                 val date = i.key.toString()
@@ -305,15 +356,25 @@ class DoctorDashboard : AppCompatActivity() {
                     if(dbCount != count)  {
                         if(count > dbCount) {
                             val added = count - dbCount
+                            tempDocDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id)
                             tempDocDatabase.child("queueCount").setValue(count)
                             if(added > 1)   {
-                                notificationQueue("You have $added new patients in queue.", id, firstName, lastName, spec, sex, consTime)
+                                val sharePreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                                val idSP = sharePreferences.getString("id", null)
+                                if(idSP == id)  {
+                                    notificationQueue("You have $added new patients in queue.", id, firstName, lastName, spec, sex, consTime)
+                                }
                             }   else if(added == 1) {
-                                notificationQueue("You have $added new patient in queue.", id, firstName, lastName, spec, sex, consTime)
+                                val sharePreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                                val idSP = sharePreferences.getString("id", null)
+                                if(idSP == id)  {
+                                    notificationQueue("You have $added new patient in queue.", id, firstName, lastName, spec, sex, consTime)
+                                }
                             }
 
                         }   else if(count < dbCount)    {
                             val subbed = dbCount - count
+                            tempDocDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR").child(id)
                             tempDocDatabase.child("queueCount").setValue(count)
                             if(subbed > 1)  {
                                 notificationQueue("$subbed patients has been removed from your queue.", id, firstName, lastName, spec, sex, consTime)
@@ -337,7 +398,8 @@ class DoctorDashboard : AppCompatActivity() {
                 }
             }
 
-            tempDocDatabase.addChildEventListener(childEventListener)
+            tempDocDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+            tempDocDatabase.child(id).child("queue").addChildEventListener(childEventListener)
         }
     }
 
@@ -438,6 +500,186 @@ class DoctorDashboard : AppCompatActivity() {
             .setContentIntent(pendingIntent)
         val managerCompat: NotificationManagerCompat = NotificationManagerCompat.from(this)
         managerCompat.notify(1234, builder.build())
+    }
+
+    private fun createNotificationChannelFP() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)  {
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel: NotificationChannel = NotificationChannel("notif3", "n", importance)
+                .apply { setShowBadge(false) }
+            channel.enableVibration(false)
+            channel.enableLights(true)
+            channel.lightColor = Color.RED
+
+            val manager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun firstPatientAlarm(id: String, slot: String) {
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(this,AlarmReceiverFP::class.java)
+        intent.putExtra("id", id)
+        intent.putExtra("slot", slot)
+        pendingIntent = PendingIntent.getBroadcast(this,0,intent,0)
+
+        //.setRepeating - set repeat alarm , .set - setAlarm for once
+        //.setExact - set exact point of time
+        alarmManager.set(
+            AlarmManager.RTC_WAKEUP,calendarFP.timeInMillis,
+            pendingIntent
+        )
+
+        Toast.makeText(this,"First patient reminder set." +
+                "${calendarFP[Calendar.MONTH]} ${calendarFP[Calendar.DATE]} ${calendarFP[Calendar.YEAR]} ${calendarFP[Calendar.HOUR_OF_DAY]} ${calendarFP[Calendar.MINUTE]}",Toast.LENGTH_LONG).show()
+    }
+
+    private fun firstPatientChecker(id: String, patientID: String, slot: String)    {
+        val valueEventListener = object : ValueEventListener    {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.value == true)   {
+                    val dialog = androidx.appcompat.app.AlertDialog.Builder(this@DoctorDashboard, R.style.AlertDialog)
+                        .setTitle("Reminder for your first patient.")
+                        .setMessage("Can you make it in time for your first appointment today at $slot?")
+                        .setPositiveButton("YES") { _, _ ->
+                            val sdfDate = SimpleDateFormat("MMddyy")
+                            val today = sdfDate.format(Date())
+                            patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
+                            patientDatabase.child(patientID).get().addOnSuccessListener { patient ->
+                                if(patient.child("bookings").exists())  {
+                                    for(i in patient.child("bookings").children)   {
+                                        if(i.child("doctor").value.toString() == id && i.child("date").value.toString() == today && i.child("timeslot").value.toString() == slot)   {
+                                            val updateChildren = mapOf(
+                                                "value" to true,
+                                                "doctor" to id,
+                                                "newTS" to slot,
+                                                "date" to today,
+                                                "timeslot" to slot,
+                                                "booking" to i.key.toString(),
+                                                "delayTime" to 0,
+                                                "traveltime" to i.child("traveltime").value.toString()
+                                            )
+
+                                            patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
+                                            patientDatabase.child(patientID).child("states").child("doctorIsOnTime")
+                                                .updateChildren(updateChildren).addOnSuccessListener {
+                                                Toast.makeText(this@DoctorDashboard, "Yay!", Toast.LENGTH_SHORT).show()
+                                            }
+
+                                            docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+                                            docDatabase.child(id).child("notifyFP").child("value").setValue(false)
+                                            docDatabase.child(id).child("doctorIsOnTime").removeValue()
+                                            docDatabase.child(id).child("doctorIsOnTime").child("value").setValue(true)
+                                            docDatabase.child(id).child("doctorIsOnTime").child("patientID").setValue(patientID)
+                                            docDatabase.child(id).child("doctorIsOnTime").child("timeslot").setValue(slot)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .setNegativeButton("NO")    { _, _ ->
+                            chooseDelayTime(id, patientID, slot)
+                            docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+                            docDatabase.child(id).child("notifyFP").child("value").setValue(false)
+                        }
+                    dialog.show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        }
+
+        docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+        docDatabase.child(id).child("notifyFP").child("value").addValueEventListener(valueEventListener)
+    }
+
+    private fun chooseDelayTime(id: String, patientID: String, slot: String) {
+        val items: Array<String> = resources.getStringArray(R.array.delay_time)
+        val checkedItem = -1
+        val builder1: AlertDialog.Builder? = AlertDialog.Builder(this)
+            .setIcon(R.drawable.ic_sad)
+            .setTitle("Delay Time")
+            .setSingleChoiceItems(items, checkedItem) { dialog, which ->
+                //action code
+                Handler().postDelayed({
+                    val builder: AlertDialog.Builder? = AlertDialog.Builder(this)
+                        .setTitle("Delay Time")
+                        .setMessage("Delay first patient for ${items[which]}?")
+                        .setPositiveButton("Yes") { _, _ ->
+                            // set new timeslot for first patient
+                            val sdf = SimpleDateFormat("HH:mm")
+                            val delayTime = items[which].filter { it.isDigit() }
+                            val c = Calendar.getInstance()
+                            try {
+                                c.time = sdf.parse(slot)
+                            }   catch (e: ParseException)  {
+                                e.printStackTrace()
+                            }
+                            c.add(Calendar.MINUTE, delayTime.toInt())
+                            val newTS = sdf.format(c.time)
+
+                            val sdfDate = SimpleDateFormat("MMddyy")
+                            val today = sdfDate.format(Date())
+
+                            patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
+                            patientDatabase.child(patientID).get().addOnSuccessListener { patient ->
+                                if(patient.child("bookings").exists())  {
+                                    for(i in patient.child("bookings").children)   {
+                                        if(i.child("doctor").value.toString() == id && i.child("date").value.toString() == today && i.child("timeslot").value.toString() == slot)   {
+                                            val updateChildren = mapOf(
+                                                "value" to false,
+                                                "doctor" to id,
+                                                "newTS" to newTS,
+                                                "date" to today,
+                                                "timeslot" to slot,
+                                                "booking" to i.key.toString(),
+                                                "delayTime" to delayTime,
+                                                "traveltime" to i.child("traveltime").value.toString()
+                                            )
+
+                                            patientDatabase = FirebaseDatabase.getInstance().getReference("Users")
+                                            patientDatabase.child(patientID).child("states").child("doctorIsOnTime")
+                                                .updateChildren(updateChildren).addOnSuccessListener {
+                                                    Toast.makeText(this@DoctorDashboard, "Aww :( No worries, we will notify your patient immediately!", Toast.LENGTH_SHORT).show()
+                                                }
+                                        }
+                                    }
+                                }
+                            }
+
+                            docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
+                            docDatabase.child(id).child("doctorIsOnTime").child("value").setValue(false)
+                            docDatabase.child(id).child("doctorIsOnTime").child("patientID").setValue(patientID)
+                            docDatabase.child(id).child("doctorIsOnTime").child("timeslot").setValue(slot)
+                            docDatabase.child(id).child("doctorIsOnTime").child("delayTime").setValue(delayTime)
+                            docDatabase.child(id).child("doctorIsOnTime").child("newTS").setValue(newTS)
+                            dialog.dismiss()
+                        }
+                        .setNeutralButton("No") {_, _ ->}
+                    val dialog2 : AlertDialog? = builder?.create()
+                    dialog2?.show()
+                    //Get alert dialog buttons
+                    val positiveButton : Button = dialog2!!.getButton(AlertDialog.BUTTON_POSITIVE)
+                    val neutralButton : Button = dialog2.getButton(AlertDialog.BUTTON_NEUTRAL)
+                    positiveButton.setTextColor(Color.parseColor("#F36767"))
+                    neutralButton.setTextColor(Color.parseColor("#F36767"))
+
+                }, 800)
+
+            }
+            .setNegativeButton("CANCEL") { dialog, which ->
+                //Toast.makeText(context, "Clicked CANCEL", Toast.LENGTH_SHORT).show()
+
+            }
+        val dialog1 : AlertDialog? = builder1?.create()
+        dialog1?.show()
+
+        //Get alert dialog buttons
+        val negativeButton : Button = dialog1!!.getButton(AlertDialog.BUTTON_NEGATIVE)
+        negativeButton.setTextColor(Color.parseColor("#F36767"))
     }
 
     private fun formatDate(date: String): String {

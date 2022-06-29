@@ -242,6 +242,8 @@ class UserItem(val name: String, val patientID: String, val message: String): It
 
         viewHolder.itemView.chatName.text = name
         viewHolder.itemView.chatMessage.text = "$dateFormatted at $slot"
-        viewHolder.itemView.chatText.text = split[5]
+        viewHolder.itemView.chatText.text =
+            if(split[5] == "null")      ""
+            else                        split[5]
     }
 }

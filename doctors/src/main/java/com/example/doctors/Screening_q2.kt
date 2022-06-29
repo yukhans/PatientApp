@@ -24,13 +24,12 @@ class Screening_q2: AppCompatActivity() {
     var nowmonth = 0
     var nowday = 0
     var nowyear = 0
-    private var confirm: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hd_form2)
 
-        supportActionBar?.title = "Patient Screening Form"
+        supportActionBar?.title = "Doctor Screening Form"
         supportActionBar?.subtitle = "Question 2"
 
         //get date today
@@ -212,9 +211,8 @@ class Screening_q2: AppCompatActivity() {
         }
 
         // set hasAnsweredScreening date and result
-        docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
-        docDatabase.child(uid).child("hasAnsweredScreening").child("date").setValue(today)
-        docDatabase.child(uid).child("hasAnsweredScreening").child("result").setValue("fail")
+        docDatabase.child("hasAnsweredScreening").child("date").setValue(today)
+        docDatabase.child("hasAnsweredScreening").child("result").setValue("fail")
 
         // remove from doctor queue
         docDatabase.get().addOnSuccessListener { doctor ->
@@ -224,7 +222,6 @@ class Screening_q2: AppCompatActivity() {
 
             for(date in datesList)  {
                 if(doctor.child("queue").child(date).exists())  {
-                    confirm = true
                     docDatabase = FirebaseDatabase.getInstance().getReference("DOCTOR")
                     docDatabase.child(uid).child("queue").child(date).removeValue()
                         .addOnSuccessListener {
